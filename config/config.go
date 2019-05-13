@@ -2,7 +2,7 @@ package config
 
 type MessageRule struct {
 	MessageType string
-	Rule        []int // 编组编码
+	Rule        []int // 电报编组规则
 }
 
 var Config = struct {

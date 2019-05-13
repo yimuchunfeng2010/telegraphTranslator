@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// 编组3： 电报类型
 func GetGroup3Info(message string) (data string, err error) {
 	//fmt.Println("GetGroup3Info：", message)
 	//defer func() {

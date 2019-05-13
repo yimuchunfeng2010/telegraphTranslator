@@ -5,7 +5,7 @@ import (
 	"telegraphTranslator/tool"
 )
 
-// 编组17数据格式
+// 编组17 落地机场及时间
 // [AB  C]
 
 // A:落地机场，B:落地时间，C：落地机场(A为ZZZZ时)

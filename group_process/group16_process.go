@@ -6,7 +6,7 @@ import (
 	"telegraphTranslator/tool"
 )
 
-// 编组16数据格式
+// 编组16 目的地机场，预计飞行时间及备降机场
 // [AB  C]
 
 // A:目的机场，B:预计飞行时间，C：目的地备降机场(可选todo待确认)

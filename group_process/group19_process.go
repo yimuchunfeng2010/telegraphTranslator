@@ -123,9 +123,9 @@ func GetOther2Info(message string) (data string, err error) {
 	// 英文单词表示救生艇颜色
 
 	messageArr := strings.Split(message, " ")
-	for _, value := range messageArr{
+	for _, value := range messageArr {
 		_, transErr := strconv.ParseFloat(value, 64)
-		if nil != transErr{
+		if nil != transErr {
 			// 字符由字母组成
 			switch value {
 			case "C":
@@ -133,26 +133,26 @@ func GetOther2Info(message string) (data string, err error) {
 			default:
 				data += "救生艇颜色: " + value + ", "
 			}
-		}else{
-			if len(value) == 2{
+		} else {
+			if len(value) == 2 {
 				data += "救生艇数目: " + value + ", "
 			}
-			if len(value) == 3{
+			if len(value) == 3 {
 				data += "救生艇可载总人数: " + value + ", "
 			}
 		}
 	}
-	data  = "暂为解析此电报" + message
+	data = "暂为解析此电报 " + message
 	return
 }
 
 func GetOther3Info(message string) (data string, err error) {
-	data  = "航空器颜色: " + strings.ToLower(message)
+	data = "航空器颜色: " + strings.ToLower(message)
 	return
 }
 
 func GetOther4Info(message string) (data string, err error) {
-	data  = "其他救生设备：" + message
+	data = "其他救生设备：" + message
 	return
 }
 

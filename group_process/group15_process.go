@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// 编组15，循环高度、速度、航路点及航路
+// 编组15 航路
 func GetGroup15Info(message string) (data string, err error) {
 	//fmt.Println("GetGroup15Info：", message)
 	//defer func() {
