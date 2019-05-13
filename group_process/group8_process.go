@@ -1,12 +1,17 @@
 package group_process
 
+import "fmt"
+
 // 编组8，飞行规则与种类 [A|	B]
 func GetGroup8Info(message string) (data string, err error) {
 	//fmt.Println("GetGroup8Info：", message)
 	//defer func() {
 	//	fmt.Println("GetGroup8Info resp: ", data)
 	//}()
-
+	if len(message) <2 {
+		fmt.Printf("编组8飞行规则数据错误，请检查[Message: %s]\n", message)
+		return 
+	}
 	flightRule, _ := GetFlightRule(message[0:1])
 	flightType, _ := GetFlightType(message[1:2])
 	data =flightRule +"," + flightType +"\n"

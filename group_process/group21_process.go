@@ -1,6 +1,7 @@
 package group_process
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -11,7 +12,12 @@ func GetGroup21Info(message string) (data string, err error) {
 	//	fmt.Println("GetGroup21Info：resp", data)
 	//}()
 
+
 	messageArr := strings.Split(message, " ")
+	if len(messageArr) < 4 {
+		fmt.Printf("编组21无线电失效情报数据错误，请检查[Message: %s]\n",message)
+		return
+	}
 	// 最后双向联系的时间
 	data += "最后双向联系时间" + messageArr[0][0:2]+"时"+messageArr[0][2:]+"分, "
 	// 最后联系的频率

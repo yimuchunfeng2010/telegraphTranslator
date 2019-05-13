@@ -1,6 +1,7 @@
 package group_process
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -14,21 +15,26 @@ func GetGroup22Info(message string) (data string, err error) {
 	//	fmt.Println("GetGroup22Info：resp", data)
 	//}()
 
-	tmpArr := strings.Split(message, "/")
-	messageType := tmpArr[0]
+	messageArr := strings.Split(message, "/")
+	if len(messageArr) < 4 {
+		fmt.Printf("编组22修订数据错误，请检查[Message: %s]\n",message)
+		return
+	}
+
+	messageType := messageArr[0]
 	tmp := ""
 	switch messageType {
 	case "8":
-		tmp, _ = GetGroup8Info(tmpArr[1])
+		tmp, _ = GetGroup8Info(messageArr[1])
 	case "14":
-		tmp, _ = GetGroup14Info(tmpArr[1]+"/"+tmpArr[2])
+		tmp, _ = GetGroup14Info(messageArr[1]+"/"+messageArr[2])
 	case "18":
-		tmp, _ = GetGroup18Info(tmpArr[1])
+		tmp, _ = GetGroup18Info(messageArr[1])
 	default:
 		data = "此工具暂未实现对此报文的解析：" + message + "\n"
 		return
 	}
 
-	data = "修改编组"+tmpArr[0]+"的内容为：" + tmp +"\n"
+	data = "修改编组"+messageArr[0]+"的内容为：" + tmp +"\n"
 	return
 }

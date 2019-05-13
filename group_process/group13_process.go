@@ -14,7 +14,7 @@ func GetGroup13Info(message string) (data string, err error) {
 	//}()
 	// 起飞机场
 	if len(message) < 4 {
-		errMsg := fmt.Sprintf("起飞机场长度不足四位：%s", message)
+		errMsg := fmt.Sprintf("编组13起飞机场信息数据错误，请检查[Message：%s]\n", message)
 		err = errors.New(errMsg)
 		return
 	}

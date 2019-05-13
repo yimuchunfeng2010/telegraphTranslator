@@ -15,6 +15,10 @@ func GetGroup14Info(message string) (data string, err error) {
 	//}()
 
 	messageArr := strings.Split(message, "/")
+	if len(messageArr) < 2 {
+		fmt.Printf("编组14预计飞跃边界数据，请检查[Message: %s]\n",message)
+		return
+	}
 	flightPoint := messageArr[0]
 	data = "边界点" + flightPoint+", "
 	// 解析飞越时间，许可飞行层高度(可选)，预计飞行高度(可选)，飞越条件(与预计飞行高度配套)

@@ -1,6 +1,7 @@
 package group_process
 
 import (
+	"fmt"
 	"strings"
 )
 // 编组5，紧急情况说明
@@ -12,6 +13,10 @@ func GetGroup5Info(message string) (data string, err error) {
 
 	messageArr := strings.Split(message, "/")
 
+	if len(messageArr) < 3 {
+		fmt.Printf("编组5紧急情况说明数据错误，请检查[Mesage: %s]\n", message)
+		return
+	}
 	riskLevel, _ := GetRiskLevel(messageArr[0])
 
 	reporterInfo ,_:= GetReporterInfo(messageArr[1])
