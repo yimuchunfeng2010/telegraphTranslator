@@ -9,6 +9,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	"telegraphTranslator/config"
 )
 
 type AirportInfo struct {
@@ -27,6 +28,29 @@ const (
 
 )
 
+func GetAirportInfo(info string) (data AirportInfo, err error){
+	cnt := 0
+	for _ , airport := range config.AirportInfo.Info{
+		if airport.Code == info || airport.AirPortCity == info || airport.IntelligenceArea == info {
+			cnt++
+			data = AirportInfo{
+				Code:             airport.Code,
+				AirPortName:      airport.AirPortName,
+				AirPortEnName:    airport.AirPortEnName,
+				AirPortCity:      airport.AirPortCity,
+				IntelligenceArea: airport.IntelligenceArea,
+			}
+		}
+	}
+	if 0 == cnt {
+		return
+	}
+
+	if 1 != cnt {
+		return data, errors.New("机场信息不唯一")
+	}
+	return
+}
 // 入场机场编码/机场地区名
 func FindAirportInfo(info string) (data AirportInfo, err error) {
 	var cnfFileName string = "airport_info.json"
@@ -168,7 +192,7 @@ func InitAirportData() {
 
 //
 //func GetTeleMessage()(message []string , err error){
-//	fptr, err := os.Open("tele_message.txt")
+//	fptr, err := os.Open("input.txt")
 //	if err != nil {
 //		panic(err)
 //	}
@@ -196,7 +220,7 @@ func InitAirportData() {
 
 
 func GetTeleMessage(message chan string)(err error) {
-	fi, err := os.Open("tele_message.txt")
+	fi, err := os.Open("input.txt")
 	if err != nil {
 		fmt.Printf("Open File Failed[Err:%s]", err.Error())
 		return

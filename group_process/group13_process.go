@@ -44,7 +44,7 @@ func GetGroup13Info(message string) (data string, err error) {
 
 func GetAirportName(airportCode string) (airportName string, err error) {
 
-	resp, err := tool.FindAirportInfo(airportCode)
+	resp, err := tool.GetAirportInfo(airportCode)
 	if err != nil {
 		return
 
