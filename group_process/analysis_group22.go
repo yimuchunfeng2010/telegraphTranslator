@@ -36,7 +36,7 @@ func AnalysisGroup22(message string) (data string, err error) {
 	case "18":
 		tmp, _ = AnalysisGroup18(messageArr[1])
 	default:
-		data = "此工具暂未实现对此报文的解析：" + message + "\n"
+		data = "无法对此报文完成解析：" + message + "\n"
 		return
 	}
 

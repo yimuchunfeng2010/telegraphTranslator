@@ -45,6 +45,9 @@ func AnalysisGroup7(message string) (data string, err error) {
 	lastDigit := ""
 	if lastChar >= "Q" && lastChar <= "Z" {
 		lastDigit = ADataMap[lastChar]
+		if "" == lastDigit{
+			lastDigit = "无法对编组7 " + lastChar + "进行解析"
+		}
 		flight = "补班" + flight[:len(flight)-1]
 		flight += lastDigit
 	}

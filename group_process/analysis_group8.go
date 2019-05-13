@@ -34,6 +34,9 @@ func GetFlightRule(message string) (data string, err error) {
 		"Z": "先目视飞行", // todo
 	}
 	data = flightRule[message]
+	if  "" == data{
+		data = "无法对飞行规则"+ message + "进行解析"
+	}
 	return
 }
 
@@ -46,5 +49,8 @@ func GetFlightType(message string) (data string, err error) {
 		"X": "其他飞行种类", // todo
 	}
 	data = flightType[message]
+	if  "" == data{
+		data = "无法对飞行类型"+ message + "进行解析"
+	}
 	return
 }

@@ -110,6 +110,9 @@ func ProSTSMessage(message string) (data string, err error) {
 	}
 
 	data = infoMap[message]
+	if "" == data{
+		data = "无法对编组18 STS/" + message + "进行解析"
+	}
 	return
 }
 
