@@ -9,10 +9,15 @@ import (
 
 // 解析电报主程序
 func ProcessMessageMain(message string) (data string, err error) {
-	fmt.Println("Message: ", message)
+	fmt.Println("电报内容: ", message)
 	// 按照"-"或者换行符进行切分
 	newMessage := strings.ReplaceAll(message, "\n", "")
 	messageArr := strings.Split(newMessage, "-")
+
+	if 0 == len(messageArr) {
+		fmt.Println("电报输入错误，请检查")
+		return
+	}
 
 	// 解析电报类型
 	group3Info, err := GetGroup3Info(messageArr[0])

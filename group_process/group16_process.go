@@ -23,7 +23,7 @@ func GetGroup16Info(message string) (data string, err error) {
 		arrportCode := meassageArr[0][:4]
 
 		// 获取机场名称
-		arrportInfo, newErr := tool.FindAirportInfo(arrportCode)
+		arrportInfo, newErr := tool.GetAirportInfo(arrportCode)
 		if newErr != nil {
 			err = newErr
 			return
@@ -50,7 +50,7 @@ func GetGroup16Info(message string) (data string, err error) {
 	bakAirportName := ""
 	if len(meassageArr) >= 2 {
 		// 获取备降机场
-		arrportInfo, newErr := tool.FindAirportInfo(meassageArr[1])
+		arrportInfo, newErr := tool.GetAirportInfo(meassageArr[1])
 		if newErr != nil {
 			err = newErr
 			return

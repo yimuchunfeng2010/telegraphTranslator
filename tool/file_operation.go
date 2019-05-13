@@ -8,8 +8,8 @@ import (
 	"io"
 	"os"
 	"strings"
-	"time"
 	"telegraphTranslator/config"
+	"time"
 )
 
 type AirportInfo struct {
@@ -28,9 +28,9 @@ const (
 
 )
 
-func GetAirportInfo(info string) (data AirportInfo, err error){
+func GetAirportInfo(info string) (data AirportInfo, err error) {
 	cnt := 0
-	for _ , airport := range config.AirportInfo.Info{
+	for _, airport := range config.AirportInfo.Info {
 		if airport.Code == info || airport.AirPortCity == info || airport.IntelligenceArea == info {
 			cnt++
 			data = AirportInfo{
@@ -51,6 +51,7 @@ func GetAirportInfo(info string) (data AirportInfo, err error){
 	}
 	return
 }
+
 // 入场机场编码/机场地区名
 func FindAirportInfo(info string) (data AirportInfo, err error) {
 	var cnfFileName string = "airport_info.json"
@@ -122,7 +123,7 @@ func InitAirportData() {
 
 		lineArr := strings.Split(line, ",")
 		codeNameMap[lineArr[5][:len(lineArr[5])-2]] = lineArr[3]
-		fmt.Printf("%s %s",lineArr[5], lineArr[3])
+		fmt.Printf("%s %s", lineArr[5], lineArr[3])
 	}
 	codeInfoArr := []AirportInfo{}
 	rd := bufio.NewReader(f)
@@ -163,7 +164,7 @@ func InitAirportData() {
 			fmt.Println("Invalid Airport Code")
 		}
 
-		fmt.Printf("%s %s\n",dataArr[0], codeNameMap[dataArr[0]])
+		fmt.Printf("%s %s\n", dataArr[0], codeNameMap[dataArr[0]])
 		codeInfoArr = append(codeInfoArr, AirportInfo{
 			Code:             dataArr[0],
 			AirPortName:      codeNameMap[dataArr[0]],
@@ -218,8 +219,17 @@ func InitAirportData() {
 //	return
 //}
 
+func GetTeleMessage(message chan string) (err error) {
 
-func GetTeleMessage(message chan string)(err error) {
+	for {
+		// 等待日志文件创建
+		if true == IsExist("input.txt") {
+			break
+			time.Sleep(time.Second)
+
+		}
+	}
+
 	fi, err := os.Open("input.txt")
 	if err != nil {
 		fmt.Printf("Open File Failed[Err:%s]", err.Error())
@@ -234,8 +244,23 @@ func GetTeleMessage(message chan string)(err error) {
 			continue
 		}
 
-		line := fmt.Sprintf("%s",a)
+		line := fmt.Sprintf("%s", a)
 
 		message <- line
+	}
+}
+
+// 判断文件是否存在
+func IsExist(f string) bool {
+	_, err := os.Stat(f)
+	return err == nil || os.IsExist(err)
+}
+
+
+func GetUseInput(message chan string) {
+	for {
+		var userCmd string
+		fmt.Scanf("%s", &userCmd)
+		message <- userCmd
 	}
 }

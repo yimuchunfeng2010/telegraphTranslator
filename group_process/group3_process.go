@@ -11,6 +11,10 @@ func GetGroup3Info(message string) (data string, err error) {
 	//	fmt.Println("GetGroup3Info resp ", data)
 	//}()
 
+	if len(message) < 3{
+		fmt.Println("电报类型错误：请检查")
+		return
+	}
 	messageType := message[0:3]
 	for _, value := range config.Group3_info.Info {
 		if value.MessageType == messageType {

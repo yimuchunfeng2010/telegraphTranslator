@@ -16,7 +16,10 @@ func main() {
 		}
 	}()
 
-
+	// 从用户命令行输入
+	go func(){
+		tool.GetUseInput(message)
+	}()
 	// 解析电报
 	for{
 		line := <- message
