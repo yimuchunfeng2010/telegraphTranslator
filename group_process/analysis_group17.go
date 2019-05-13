@@ -14,7 +14,7 @@ import (
 func AnalysisGroup17(message string) (data string, err error) {
 	if true == global.GlobalVar.PrintDebugInfo {
 		fmt.Println("GetGroup17Info：", message)
-		defer func(){
+		defer func() {
 			fmt.Println("GetGroup17Info：resp", data)
 		}()
 	}

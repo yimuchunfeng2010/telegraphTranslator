@@ -1,6 +1,7 @@
 package analysis_group
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 	"telegraphTranslator/global"
@@ -17,7 +18,8 @@ func AnalysisGroup10(message string) (data string, err error) {
 	messageArr := strings.Split(message, "/")
 
 	if len(messageArr) < 2 {
-		fmt.Printf("编组10机载设备与能力数据错误，请检查[Message: %s]\n", message)
+		errMsg := fmt.Sprintf("编组10机载设备与能力数据错误，请检查[Message: %s]\n", message)
+		err = errors.New(errMsg)
 		return
 	}
 	data1, err := GetEquipmentInfo(messageArr[0])

@@ -1,6 +1,7 @@
 package analysis_group
 
 import (
+	"errors"
 	"fmt"
 	"telegraphTranslator/config"
 	"telegraphTranslator/global"
@@ -8,16 +9,16 @@ import (
 
 // 编组3： 电报类型
 func AnalysisGroup3(message string) (data string, err error) {
-	if true == global.GlobalVar.PrintDebugInfo{
+	if true == global.GlobalVar.PrintDebugInfo {
 		fmt.Println("GetGroup3Info：", message)
 		defer func() {
 			fmt.Println("GetGroup3Info resp ", data)
 		}()
 	}
 
-
 	if len(message) < 3 {
-		fmt.Printf("电报类型数据错误：请检查[Message: %s]\n",message)
+		errMsg := fmt.Sprintf("电报类型数据错误：请检查[Message: %s]\n", message)
+		err = errors.New(errMsg)
 		return
 	}
 	messageType := message[0:3]

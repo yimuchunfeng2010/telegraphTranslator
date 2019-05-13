@@ -1,6 +1,7 @@
 package analysis_group
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 	"telegraphTranslator/global"
@@ -16,7 +17,8 @@ func AnalysisGroup21(message string) (data string, err error) {
 	}
 	messageArr := strings.Split(message, " ")
 	if len(messageArr) < 4 {
-		fmt.Printf("编组21无线电失效情报数据错误，请检查[Message: %s]\n", message)
+		errMsg := fmt.Sprintf("编组21无线电失效情报数据错误，请检查[Message: %s]\n", message)
+		err = errors.New(errMsg)
 		return
 	}
 	// 最后双向联系的时间

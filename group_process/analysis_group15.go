@@ -18,7 +18,10 @@ func AnalysisGroup15(message string) (data string, err error) {
 	}
 	messageArr := strings.Split(message, "/")
 
-	data, _ = GetCruiseInfo(messageArr[0])
+	data, err = GetCruiseInfo(messageArr[0])
+	if err != nil {
+		return
+	}
 	// todo 暂未处理航路
 	// messageArr[1]
 
@@ -41,8 +44,8 @@ func GetCruiseInfo(message string) (data string, err error) {
 		offset++
 	}
 
-	speed, _ := GetSpeedInfo(speedHeight[:offset])
-	height, _ := GetHeightInfo(speedHeight[offset:])
+	speed, err := GetSpeedInfo(speedHeight[:offset])
+	height, err := GetHeightInfo(speedHeight[offset:])
 
 	// 第二个元素及以后皆为航路点
 	point := "经过航路点"

@@ -1,6 +1,7 @@
 package analysis_group
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 	"telegraphTranslator/global"
@@ -34,7 +35,8 @@ func AnalysisGroup7(message string) (data string, err error) {
 	messageArr := strings.Split(message, "/")
 
 	if len(messageArr) < 1 {
-		fmt.Printf("编组7数据错误：请检查[Message: %s]\n", message)
+		errMsg := fmt.Sprintf("编组7数据错误：请检查[Message: %s]\n", message)
+		err = errors.New(errMsg)
 		return
 	}
 	// 解析航班号

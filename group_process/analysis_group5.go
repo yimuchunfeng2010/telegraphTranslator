@@ -1,6 +1,7 @@
 package analysis_group
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 	"telegraphTranslator/global"
@@ -17,7 +18,8 @@ func AnalysisGroup5(message string) (data string, err error) {
 	messageArr := strings.Split(message, "/")
 
 	if len(messageArr) < 3 {
-		fmt.Printf("编组5紧急情况说明数据错误，请检查[Mesage: %s]\n", message)
+		errMsg := fmt.Sprintf("编组5紧急情况说明数据错误，请检查[Mesage: %s]\n", message)
+		err = errors.New(errMsg)
 		return
 	}
 	riskLevel, _ := GetRiskLevel(messageArr[0])

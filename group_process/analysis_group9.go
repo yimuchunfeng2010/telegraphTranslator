@@ -19,7 +19,8 @@ func AnalysisGroup9(message string) (data string, err error) {
 	}
 	messageArr := strings.Split(message, "/")
 	if len(messageArr) != 2 {
-		err = errors.New("编组9数据格式错误")
+		errMsg := fmt.Sprintf("编组9数据格式错误,请检查[Message: %s]", message)
+		err = errors.New(errMsg)
 		return
 	}
 
@@ -59,7 +60,7 @@ func AnalysisGroup9(message string) (data string, err error) {
 	case "L":
 		wakeflow = "轻型机"
 	default:
-		err = errors.New("无效尾流标志")
+		err = errors.New(fmt.Sprintf("无效尾流标志[Message: %s]", wakeflow))
 		return
 	}
 

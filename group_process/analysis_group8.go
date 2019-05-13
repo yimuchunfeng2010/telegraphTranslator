@@ -1,6 +1,7 @@
 package analysis_group
 
 import (
+	"errors"
 	"fmt"
 	"telegraphTranslator/global"
 )
@@ -15,7 +16,8 @@ func AnalysisGroup8(message string) (data string, err error) {
 	}
 
 	if len(message) < 2 {
-		fmt.Printf("编组8飞行规则数据错误，请检查[Message: %s]\n", message)
+		errMsg := fmt.Sprintf("编组8飞行规则数据错误，请检查[Message: %s]\n", message)
+		err = errors.New(errMsg)
 		return
 	}
 	flightRule, _ := GetFlightRule(message[0:1])
