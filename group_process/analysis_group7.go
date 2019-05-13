@@ -26,13 +26,17 @@ var ADataMap = map[string]string{
 func AnalysisGroup7(message string) (data string, err error) {
 	if true == global.GlobalVar.PrintDebugInfo {
 		fmt.Println("Group7Info：", message)
-		defer func(){
+		defer func() {
 			fmt.Println("Group7Info resp ", data)
 		}()
 	}
 	// 编组7以"/"为分隔符
 	messageArr := strings.Split(message, "/")
 
+	if len(messageArr) < 1 {
+		fmt.Printf("编组7数据错误：请检查[Message: %s]\n", message)
+		return
+	}
 	// 解析航班号
 	flight := messageArr[0]
 	lastChar := flight[len(flight)-1:]

@@ -17,7 +17,7 @@ func AnalysisGroup3(message string) (data string, err error) {
 
 
 	if len(message) < 3 {
-		fmt.Println("电报类型错误：请检查")
+		fmt.Printf("电报类型数据错误：请检查[Message: %s]\n",message)
 		return
 	}
 	messageType := message[0:3]

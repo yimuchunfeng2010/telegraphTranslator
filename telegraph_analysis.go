@@ -30,9 +30,15 @@ func main() {
 		if 0 == len(line) {
 			continue
 		}
+
+		if "quit" == line || "q" == line || "Q" == line || "exit" == line {
+			fmt.Println("程序退出")
+			break
+		}
 		resp, err := analysis_group.ProcessMessageMain(line)
 		if err != nil {
 			fmt.Println(err.Error())
+			continue
 		}
 		fmt.Println(resp)
 	}

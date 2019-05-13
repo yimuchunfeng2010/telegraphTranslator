@@ -7,13 +7,13 @@ import (
 	"telegraphTranslator/config"
 )
 
-// 解析电报主程序
+// 解析电报主函数
 func ProcessMessageMain(message string) (data string, err error) {
 	fmt.Println("电报内容: ", message)
+
 	// 按照"-"或者换行符进行切分
 	newMessage := strings.ReplaceAll(message, "\n", "")
 	messageArr := strings.Split(newMessage, "-")
-
 	if 0 == len(messageArr) {
 		fmt.Println("电报输入错误，请检查")
 		return
@@ -41,7 +41,7 @@ func ProcessMessageMain(message string) (data string, err error) {
 	}
 
 	if messageRule.MessageType == "" {
-		errMsg := "未找到正确的电报类型"
+		errMsg := fmt.Sprintf("未找到正确的电报类型[Type: %s]", messageArr[0])
 		err = errors.New(errMsg)
 		return
 	}
@@ -51,10 +51,12 @@ func ProcessMessageMain(message string) (data string, err error) {
 	blank := "    -"
 	for _, value := range messageRule.Rule {
 		processRsp := ""
-		if index > len(messageArr) {
-			break
+		if index >= len(messageArr) {
+			errMsg := fmt.Sprintf("数据格式错误，请检查[Message: %s]\n", message)
+			err = errors.New(errMsg)
+			return
 		}
-		// 按照编制类型进行解析
+		// 按照编组类型进行解析
 		switch value {
 		case 3:
 			// 编组3已处理
@@ -89,7 +91,7 @@ func ProcessMessageMain(message string) (data string, err error) {
 		case 22:
 			processRsp, err = AnalysisGroup22(messageArr[index])
 		default:
-			errMsg := fmt.Sprintf("当前未对编组%d的内容进行解析\n", value)
+			errMsg := fmt.Sprintf("当前未对编组%s的内容进行解析\n", value)
 			err = errors.New(errMsg)
 			return
 		}
