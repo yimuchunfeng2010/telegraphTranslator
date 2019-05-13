@@ -1,8 +1,9 @@
-package group_process
+package analysis_group
 
 import (
 	"fmt"
 	"strings"
+	"telegraphTranslator/global"
 	"telegraphTranslator/tool"
 )
 
@@ -10,11 +11,13 @@ import (
 // [AB  C]
 
 // A:目的机场，B:预计飞行时间，C：目的地备降机场(可选todo待确认)
-func GetGroup16Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup16Info：", message)
-	//defer func() {
-	//	fmt.Println("GetGroup16Info resp ：", data)
-	//}()
+func AnalysisGroup16(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("GetGroup16Info：", message)
+		defer func() {
+			fmt.Println("GetGroup16Info resp ：", data)
+		}()
+	}
 	meassageArr := strings.Split(message, " ")
 
 	// 第一部分为目的机场+飞行时间(可选)

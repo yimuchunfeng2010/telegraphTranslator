@@ -1,19 +1,22 @@
-package group_process
+package analysis_group
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
+	"telegraphTranslator/global"
 )
 
 // 编组9，航空器数目、机型和尾流等级
 //[A]B/C []表示可选
-func GetGroup9Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup9Info：", message)
-	//defer func() {
-	//	fmt.Println("GetGroup9Info resp: ", data)
-	//}()
-
+func AnalysisGroup9(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("GetGroup9Info：", message)
+		defer func() {
+			fmt.Println("GetGroup9Info resp: ", data)
+		}()
+	}
 	messageArr := strings.Split(message, "/")
 	if len(messageArr) != 2 {
 		err = errors.New("编组9数据格式错误")

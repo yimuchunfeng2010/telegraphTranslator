@@ -1,21 +1,23 @@
-package group_process
+package analysis_group
 
 import (
 	"fmt"
 	"strings"
+	"telegraphTranslator/global"
 )
 
 // 编组10，机载设备与能力
-func GetGroup10Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup10Info：", message)
-	//defer func() {
-	//	fmt.Println("GetGroup10Info resp: ", data)
-	//}()
-
+func AnalysisGroup10(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("GetGroup10Info：", message)
+		defer func() {
+			fmt.Println("GetGroup10Info resp: ", data)
+		}()
+	}
 	messageArr := strings.Split(message, "/")
 
 	if len(messageArr) < 2 {
-		fmt.Printf("编组10机载设备与能力数据错误，请检查[Message: %s]\n",message)
+		fmt.Printf("编组10机载设备与能力数据错误，请检查[Message: %s]\n", message)
 		return
 	}
 	data1, err := GetEquipmentInfo(messageArr[0])

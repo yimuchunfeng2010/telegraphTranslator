@@ -1,19 +1,22 @@
-package group_process
+package analysis_group
 
 import (
+	"fmt"
 	"strings"
+	"telegraphTranslator/global"
 )
 
 //编组18 其他补充情报
 // [AB  C]
 
 // A:落地机场，B:落地时间，C：落地机场(A为ZZZZ时)
-func GetGroup18Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup18Info：", message)
-	//defer func() {
-	//	fmt.Println("GetGroup18Info：resp", data)
-	//}()
-
+func AnalysisGroup18(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("GetGroup18Info：", message)
+		defer func() {
+			fmt.Println("GetGroup18Info：resp", data)
+		}()
+	}
 	if "0" == message {
 		data = "本航班无其他补充信息\n"
 		return

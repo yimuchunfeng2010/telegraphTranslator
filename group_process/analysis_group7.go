@@ -1,7 +1,9 @@
-package group_process
+package analysis_group
 
 import (
+	"fmt"
 	"strings"
+	"telegraphTranslator/global"
 )
 
 // 编组7 航空器识别标志
@@ -21,11 +23,13 @@ var ADataMap = map[string]string{
 	"Q": "9",
 }
 
-func GetGroup7Info(message string) (data string, err error) {
-	//fmt.Println("Group7Info：", message)
-	//defer func(){
-	//	fmt.Println("Group7Info resp ", data)
-	//}()
+func AnalysisGroup7(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("Group7Info：", message)
+		defer func(){
+			fmt.Println("Group7Info resp ", data)
+		}()
+	}
 	// 编组7以"/"为分隔符
 	messageArr := strings.Split(message, "/")
 

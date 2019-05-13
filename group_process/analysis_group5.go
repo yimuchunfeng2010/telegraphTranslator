@@ -1,16 +1,19 @@
-package group_process
+package analysis_group
 
 import (
 	"fmt"
 	"strings"
+	"telegraphTranslator/global"
 )
-// 编组5，紧急情况说明
-func GetGroup5Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup5Info：", message)
-	//defer func() {
-	//	fmt.Println("GetGroup5Info resp ", data)
-	//}()
 
+// 编组5，紧急情况说明
+func AnalysisGroup5(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("GetGroup5Info：", message)
+		defer func() {
+			fmt.Println("GetGroup5Info resp ", data)
+		}()
+	}
 	messageArr := strings.Split(message, "/")
 
 	if len(messageArr) < 3 {
@@ -19,15 +22,15 @@ func GetGroup5Info(message string) (data string, err error) {
 	}
 	riskLevel, _ := GetRiskLevel(messageArr[0])
 
-	reporterInfo ,_:= GetReporterInfo(messageArr[1])
+	reporterInfo, _ := GetReporterInfo(messageArr[1])
 
 	otherInfo := "其他信息: " + strings.ToLower(messageArr[2])
 
-	data = riskLevel + ", " + reporterInfo + ", " + otherInfo +"\n"
+	data = riskLevel + ", " + reporterInfo + ", " + otherInfo + "\n"
 	return
 }
 
-func GetRiskLevel(message string)(data string, err error){
+func GetRiskLevel(message string) (data string, err error) {
 	tmp := ""
 	switch message {
 	case "INCERFA":
@@ -42,8 +45,7 @@ func GetRiskLevel(message string)(data string, err error){
 	return
 }
 
-
-func GetReporterInfo(message string)(data string, err error){
+func GetReporterInfo(message string) (data string, err error) {
 	// 前4位为机场编号
 
 	airportCode := message[0:4]

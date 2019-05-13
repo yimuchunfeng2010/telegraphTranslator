@@ -1,33 +1,34 @@
-package group_process
+package analysis_group
 
 import (
 	"errors"
 	"fmt"
 	"strconv"
 	"strings"
+	"telegraphTranslator/global"
 )
 
 // 编组14，预计飞跃边界数据
-func GetGroup14Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup14Info：", message)
-	//defer func() {
-	//	fmt.Println("GetGroup14Info resp: ", data)
-	//}()
-
+func AnalysisGroup14(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("GetGroup14Info：", message)
+		defer func() {
+			fmt.Println("GetGroup14Info resp: ", data)
+		}()
+	}
 	messageArr := strings.Split(message, "/")
 	if len(messageArr) < 2 {
-		fmt.Printf("编组14预计飞跃边界数据，请检查[Message: %s]\n",message)
+		fmt.Printf("编组14预计飞跃边界数据，请检查[Message: %s]\n", message)
 		return
 	}
 	flightPoint := messageArr[0]
-	data = "边界点" + flightPoint+", "
+	data = "边界点" + flightPoint + ", "
 	// 解析飞越时间，许可飞行层高度(可选)，预计飞行高度(可选)，飞越条件(与预计飞行高度配套)
 
 	flightInfo := messageArr[1]
 
 	flightOverTime := flightInfo[0:4]
 	data += "预计飞越时间" + flightOverTime[0:2] + "时" + flightOverTime[2:] + "分" + ", "
-
 
 	heightArr := make([]string, 0)
 	tmp := ""

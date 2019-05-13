@@ -1,20 +1,23 @@
-package group_process
+package analysis_group
 
 import (
 	"fmt"
 	"strconv"
 	"strings"
+	"telegraphTranslator/global"
 )
 
 //编组19 补充情报
 // [AB  C]
 
 // A:落地机场，B:落地时间，C：落地机场(A为ZZZZ时)
-func GetGroup19Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup19Info：", message)
-	//defer func() {
-	//	fmt.Println("GetGroup19Info：resp", data)
-	//}()
+func AnalysisGroup19(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("GetGroup19Info：", message)
+		defer func() {
+			fmt.Println("GetGroup19Info：resp", data)
+		}()
+	}
 
 	messageArr := strings.Split(message, " ")
 

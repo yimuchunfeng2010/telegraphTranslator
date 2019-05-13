@@ -1,7 +1,9 @@
-package group_process
+package analysis_group
 
 import (
+	"fmt"
 	"strings"
+	"telegraphTranslator/global"
 	"telegraphTranslator/tool"
 )
 
@@ -9,11 +11,13 @@ import (
 // [AB  C]
 
 // A:落地机场，B:落地时间，C：落地机场(A为ZZZZ时)
-func GetGroup17Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup17Info：", message)
-	//defer func(){
-	//	fmt.Println("GetGroup17Info：resp", data)
-	//}()
+func AnalysisGroup17(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("GetGroup17Info：", message)
+		defer func(){
+			fmt.Println("GetGroup17Info：resp", data)
+		}()
+	}
 	meassageArr := strings.Split(message, " ")
 
 	arrportName := "" // 落地机场

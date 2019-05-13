@@ -1,21 +1,24 @@
-package group_process
+package analysis_group
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
+	"telegraphTranslator/global"
 )
 
 // 编组15 航路
-func GetGroup15Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup15Info：", message)
-	//defer func() {
-	//	fmt.Println("GetGroup15Info resp: ", data)
-	//}()
-
+func AnalysisGroup15(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo {
+		fmt.Println("GetGroup15Info：", message)
+		defer func() {
+			fmt.Println("GetGroup15Info resp: ", data)
+		}()
+	}
 	messageArr := strings.Split(message, "/")
 
-	data ,_ = GetCruiseInfo(messageArr[0])
+	data, _ = GetCruiseInfo(messageArr[0])
 	// todo 暂未处理航路
 	// messageArr[1]
 
@@ -43,11 +46,11 @@ func GetCruiseInfo(message string) (data string, err error) {
 
 	// 第二个元素及以后皆为航路点
 	point := "经过航路点"
-	for _, value := range messageArr[1:]{
+	for _, value := range messageArr[1:] {
 		point += value + " "
 	}
 
-	data = speed + ", " + height +", " + point
+	data = speed + ", " + height + ", " + point
 	return
 }
 

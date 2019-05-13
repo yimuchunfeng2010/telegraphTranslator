@@ -1,18 +1,22 @@
-package group_process
+package analysis_group
 
 import (
-	"telegraphTranslator/config"
 	"fmt"
+	"telegraphTranslator/config"
+	"telegraphTranslator/global"
 )
 
 // 编组3： 电报类型
-func GetGroup3Info(message string) (data string, err error) {
-	//fmt.Println("GetGroup3Info：", message)
-	//defer func() {
-	//	fmt.Println("GetGroup3Info resp ", data)
-	//}()
+func AnalysisGroup3(message string) (data string, err error) {
+	if true == global.GlobalVar.PrintDebugInfo{
+		fmt.Println("GetGroup3Info：", message)
+		defer func() {
+			fmt.Println("GetGroup3Info resp ", data)
+		}()
+	}
 
-	if len(message) < 3{
+
+	if len(message) < 3 {
 		fmt.Println("电报类型错误：请检查")
 		return
 	}
@@ -74,6 +78,6 @@ func GetGroup3Info(message string) (data string, err error) {
 func ProLAMGroup3Message(message []string) (data string, err error) {
 
 	data = "空中交通服务单位" + message[1] + "收到了单位" + message[0] + "所发的" + message[2] + "电报" + ","
-	data += "此电报为对单位"+message[3]+"发送给单位"+message[4]+"的"+message[5]+"号电报的确认"
+	data += "此电报为对单位" + message[3] + "发送给单位" + message[4] + "的" + message[5] + "号电报的确认"
 	return
 }

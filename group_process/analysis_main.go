@@ -1,4 +1,4 @@
-package group_process
+package analysis_group
 
 import (
 	"errors"
@@ -19,13 +19,13 @@ func ProcessMessageMain(message string) (data string, err error) {
 		return
 	}
 
-	// 解析电报类型
-	group3Info, err := GetGroup3Info(messageArr[0])
+	// 编组3 解析电报类型
+	group3Info, err := AnalysisGroup3(messageArr[0])
 	if err != nil {
 		return
 	}
 	// 对逻辑确认报特殊处理
-	if strings.HasPrefix(messageArr[0],"LAM"){
+	if strings.HasPrefix(messageArr[0], "LAM") {
 		data = group3Info
 		return
 	}
@@ -54,39 +54,40 @@ func ProcessMessageMain(message string) (data string, err error) {
 		if index > len(messageArr) {
 			break
 		}
+		// 按照编制类型进行解析
 		switch value {
 		case 3:
 			// 编组3已处理
 		case 5:
-			processRsp, err = GetGroup5Info(messageArr[index])
+			processRsp, err = AnalysisGroup5(messageArr[index])
 		case 7:
-			processRsp, err = GetGroup7Info(messageArr[index])
+			processRsp, err = AnalysisGroup7(messageArr[index])
 		case 8:
-			processRsp, err = GetGroup8Info(messageArr[index])
+			processRsp, err = AnalysisGroup8(messageArr[index])
 		case 9:
-			processRsp, err = GetGroup9Info(messageArr[index])
+			processRsp, err = AnalysisGroup9(messageArr[index])
 		case 10:
-			processRsp, err = GetGroup10Info(messageArr[index])
+			processRsp, err = AnalysisGroup10(messageArr[index])
 		case 13:
-			processRsp, err = GetGroup13Info(messageArr[index])
+			processRsp, err = AnalysisGroup13(messageArr[index])
 		case 14:
-			processRsp, err = GetGroup14Info(messageArr[index])
+			processRsp, err = AnalysisGroup14(messageArr[index])
 		case 15:
-			processRsp, err = GetGroup15Info(messageArr[index])
+			processRsp, err = AnalysisGroup15(messageArr[index])
 		case 16:
-			processRsp, err = GetGroup16Info(messageArr[index])
+			processRsp, err = AnalysisGroup16(messageArr[index])
 		case 17:
-			processRsp, err = GetGroup17Info(messageArr[index])
+			processRsp, err = AnalysisGroup17(messageArr[index])
 		case 18:
-			processRsp, err = GetGroup18Info(messageArr[index])
+			processRsp, err = AnalysisGroup18(messageArr[index])
 		case 19:
-			processRsp, err = GetGroup19Info(messageArr[index])
+			processRsp, err = AnalysisGroup19(messageArr[index])
 		case 20:
-			processRsp, err = GetGroup20Info(messageArr[index])
+			processRsp, err = AnalysisGroup20(messageArr[index])
 		case 21:
-			processRsp, err = GetGroup21Info(messageArr[index])
+			processRsp, err = AnalysisGroup21(messageArr[index])
 		case 22:
-			processRsp, err = GetGroup22Info(messageArr[index])
+			processRsp, err = AnalysisGroup22(messageArr[index])
 		default:
 			errMsg := fmt.Sprintf("当前未对编组%d的内容进行解析\n", value)
 			err = errors.New(errMsg)
