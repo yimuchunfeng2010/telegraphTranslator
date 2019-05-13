@@ -1,10 +1,10 @@
 package group_process
 
 import (
-	"config"
 	"errors"
 	"fmt"
 	"strings"
+	"telegraphTranslator/config"
 )
 
 // 解析电报主程序

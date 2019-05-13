@@ -3,7 +3,7 @@ package group_process
 import (
 	"fmt"
 	"strings"
-	"tool"
+	"telegraphTranslator/tool"
 )
 
 // 编组16数据格式

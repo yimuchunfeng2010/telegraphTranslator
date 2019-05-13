@@ -2,7 +2,7 @@ package group_process
 
 import (
 	"strings"
-	"tool"
+	"telegraphTranslator/tool"
 )
 
 // 编组17数据格式

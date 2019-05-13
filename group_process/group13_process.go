@@ -3,7 +3,7 @@ package group_process
 import (
 	"errors"
 	"fmt"
-	"tool"
+	"telegraphTranslator/tool"
 )
 
 // 编组13，获取起飞机场及时间

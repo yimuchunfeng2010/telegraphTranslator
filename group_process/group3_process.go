@@ -1,7 +1,7 @@
 package group_process
 
 import (
-	"config"
+	"telegraphTranslator/config"
 	"fmt"
 )
 

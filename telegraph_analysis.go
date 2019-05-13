@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"group_process"
-	"tool"
+	"telegraphTranslator/group_process"
+	"telegraphTranslator/tool"
 )
 
 func main() {
@@ -18,7 +18,6 @@ func main() {
 
 
 	// 解析电报
-
 	for{
 		line := <- message
 		if 0 == len(line){
@@ -30,6 +29,5 @@ func main() {
 		}
 		fmt.Println(resp)
 	}
-
 
 }
