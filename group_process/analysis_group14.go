@@ -86,12 +86,11 @@ func GetFlightOverCondition(message string) (data string, err error) {
 	case "B":
 		data = "或其以下飞越边界点"
 	default:
-		data = "不合法字段"
+		data = "无法对编组14过点状态标志进行解析，合法标志为A/B, 当前标志为" + message
 	}
 	return
 }
 func AnalysisHeightInfo(message string) (data string, err error) {
-
 	unitType := message[0:1]
 	switch unitType {
 	case "M":
@@ -115,7 +114,8 @@ func AnalysisHeightInfo(message string) (data string, err error) {
 		heightStr := strconv.FormatFloat(height, 'f', -1, 32)
 		data += "飞行层高度" + heightStr + "英尺"
 	default:
-		err = errors.New("非法高度类型")
+		errMsg := fmt.Sprintf("非法高度类型%s",unitType)
+		err = errors.New(errMsg)
 		return
 
 	}

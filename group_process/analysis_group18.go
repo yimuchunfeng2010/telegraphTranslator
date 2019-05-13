@@ -92,7 +92,6 @@ func ProDOFMessage(message string) (data string, err error) {
 }
 
 func ProSTSMessage(message string) (data string, err error) {
-
 	infoMap := map[string]string{
 		"ALTRV":   "按照预留高度运行的飞行",
 		"ATFMX":   "有关交通服务当局批准豁免交通流量管理措施的飞行",
@@ -123,7 +122,6 @@ func ProPBNMessage(message string) (data string, err error) {
 }
 
 func ProNAVMessage(message string) (data string, err error) {
-
 	switch message {
 	case "ABAS":
 		data = "全球导航增强系统ABAS"
@@ -135,13 +133,11 @@ func ProNAVMessage(message string) (data string, err error) {
 }
 
 func ProREGMessage(message string) (data string, err error) {
-
 	data = "航空器登记标志" + message
 	return
 }
 
 func ProEETMessage(message string) (data string, err error) {
-
 	messageArr := strings.Split(message, " ")
 	data = "起飞预计"
 	for _, value := range messageArr {

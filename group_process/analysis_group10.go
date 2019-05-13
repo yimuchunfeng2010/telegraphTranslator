@@ -38,7 +38,7 @@ func AnalysisGroup10(message string) (data string, err error) {
 }
 
 func GetEquipmentInfo(message string) (data string, err error) {
-
+	keepMessage := message
 	aDataMap := map[string]string{
 		"N":  "航空器未载有无线电通信、导航、进近设备或此类设备不工作",
 		"S":  "航空器未载有标准的通信、导航、进近设备并可工作",
@@ -79,12 +79,18 @@ func GetEquipmentInfo(message string) (data string, err error) {
 	for key, value := range aDataMap {
 		if true == strings.Contains(message, key) {
 			data += value + ", "
+			keepMessage = strings.ReplaceAll(keepMessage, key, "")
 		}
+	}
+
+	if 0 != len(keepMessage){
+		data = "编组10无线电通信、导航、进近助降设备存在无法解析的信息: " + keepMessage + ", "  + data
 	}
 	return
 }
 
 func GetCapactiyInfo(message string) (data string, err error) {
+	keepMessage := message
 	bDataMap := map[string]string{
 		"N":  "没有应答机",
 		"A":  "应答机A模式",
@@ -108,7 +114,12 @@ func GetCapactiyInfo(message string) (data string, err error) {
 	for key, value := range bDataMap {
 		if true == strings.Contains(message, key) {
 			data += value + ", "
+			keepMessage = strings.ReplaceAll(keepMessage, key, "")
 		}
+	}
+
+	if 0 != len(keepMessage){
+		data = "编组10监视设备与能力存在无法解析的信息: " + keepMessage + ", " + data
 	}
 	return
 }
