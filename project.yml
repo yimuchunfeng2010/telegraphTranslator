@@ -1,0 +1,5 @@
+name: telegraph-translator
+version: 1.0.0
+description: MH/T 4007-2012标准电报解析工具
+program_language: golang
+
