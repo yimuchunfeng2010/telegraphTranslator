@@ -30,7 +30,6 @@ func main() {
 		if 0 == len(line) {
 			continue
 		}
-
 		if "quit" == line || "q" == line || "Q" == line || "exit" == line {
 			fmt.Println("程序退出")
 			break

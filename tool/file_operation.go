@@ -52,7 +52,7 @@ func GetAirportInfo(info string) (data AirportInfo, err error) {
 func GetTeleMessageFromUserInput(message chan string) (err error) {
 	for {
 		var userCmd string
-		fmt.Scanf("%s", &userCmd)
+		MyScanf(&userCmd)
 		message <- userCmd
 	}
 	return
@@ -92,4 +92,11 @@ func GetTeleMessageFromFile(message chan string) (err error) {
 func IsExist(f string) bool {
 	_, err := os.Stat(f)
 	return err == nil || os.IsExist(err)
+}
+
+// 用以解决fmt.scanf不能有空格的问题
+func MyScanf(a *string) {
+	reader := bufio.NewReader(os.Stdin)
+	data, _, _ := reader.ReadLine()
+	*a = string(data)
 }
